@@ -1,0 +1,210 @@
+#include<stdio.h>
+#include<GL/glut.h>
+#include<math.h>
+#include <stdarg.h>
+#define QUIT 0
+
+
+GLfloat b[2][6]={{72,72,75,75,125,135},
+{77,180,225,79.5,79.5,77}};
+
+/*void
+output(GLfloat x, GLfloat y, char *format,...)
+{
+  va_list args;
+  char buffer[200], *p;
+
+  va_start(args, format);
+  vsprintf(buffer, format, args);
+  va_end(args);
+  glPushMatrix();
+  glTranslatef(x, y, 0);
+  for (p = buffer; *p; p++)
+    glutStrokeCharacter(GLUT_STROKE_ROMAN, *p);
+  glPopMatrix();
+}*/
+void
+menu_select(int item)
+{
+  if (item == QUIT)
+    exit(0);
+  //obj = item;
+  glutPostRedisplay();
+}
+void rocket()
+{
+	
+	glBegin(GL_POLYGON);
+	glColor3f(.7,0.7,0.7);
+	glVertex2f(87,100);
+	glVertex2f(87,180);
+	glVertex2f(113,180);
+	glVertex2f(113,100);
+	glEnd();
+	
+	glColor3f(.5,.5,.1);
+	glBegin(GL_POLYGON);
+	glVertex2f(80,90);
+	glVertex2f(87,140);
+	glVertex2f(90,90);
+	glEnd();
+
+	glColor3f(0,0,0);
+		glBegin(GL_POINTS);
+	glVertex2f(87,90);
+	glEnd();
+	
+	glColor3f(.5,.5,.1);
+	glBegin(GL_POLYGON);
+	glVertex2f(94,90);
+	glVertex2f(100,130);
+	glVertex2f(106,90);
+	glEnd();
+
+	glColor3f(0,0,0);
+		glBegin(GL_POINTS);
+	glVertex2f(100,90);
+	glEnd();
+
+	glColor3f(.5,.5,.1);
+	glBegin(GL_POLYGON);
+	glVertex2f(110,90);
+	glVertex2f(113,140);
+	glVertex2f(120,90);
+	glEnd();
+	glColor3f(0,0,0);
+		glBegin(GL_POINTS);
+	glVertex2f(113,90);
+	glEnd();
+
+
+
+	/*glColor3f(0,0,0);
+	glBegin(GL_LINES);
+	glVertex2f(r[0][7],r[1][7]);
+	glVertex2f(r[0][8],r[1][8]);
+	glEnd();*/
+
+	
+
+
+	
+	
+	glBegin(GL_POLYGON);
+	glVertex2f(87,180);
+	glVertex2f(91,200);
+	glVertex2f(100,220);
+	glColor3f(0,.1,0.5);
+	glVertex2f(109,200);
+	glVertex2f(113,180);
+	glEnd();
+
+	
+
+}
+void flag()
+{
+	glColor3f(0,1,0);
+	glBegin(GL_POLYGON);
+	glVertex2f(91,130);
+	glVertex2f(91,140);
+	glVertex2f(109,140);
+	glVertex2f(109,130);
+	glEnd();
+	glColor3f(1,1,1);
+	glBegin(GL_POLYGON);
+	glVertex2f(91,140);
+	glVertex2f(91,150);
+	glVertex2f(109,150);
+	glVertex2f(109,140);
+	glEnd();
+	
+	glColor3f(1,0,0);
+	glBegin(GL_POLYGON);
+	glVertex2f(91,150);
+	glVertex2f(91,160);
+	glVertex2f(109,160);
+	glVertex2f(109,150);
+	glEnd();
+
+	glColor3f(0,0,1);
+		glBegin(GL_POINTS);
+	glVertex2f(100,145);
+	glEnd();
+}
+
+
+void rbase()
+{
+	glColor3f(.3,0.30,0.3);
+	glBegin(GL_POLYGON);
+	glVertex2f(b[0][0],b[1][0]);
+	glVertex2f(b[0][1],b[1][1]);
+	glVertex2f(b[0][2],b[1][2]);
+	glVertex2f(b[0][3],b[1][3]);
+	glVertex2f(b[0][4],b[1][4]);
+	glVertex2f(b[0][5],b[1][5]);
+	
+	glEnd();
+}
+void land()
+{
+	glColor3f(0.9,.91,0);
+	glBegin(GL_POLYGON);
+	glVertex2f(0.0,0.0);
+	glVertex2f(0.0,70.0);
+	//glColor3f(0.0,0.5,0.6);
+    glVertex2f(499.0,70.0);
+	glVertex2f(499.0,0.0);
+	glEnd();
+}
+
+
+void display()
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	
+	/*gluOrtho2D(0, 3000, 0, 3000);
+  glMatrixMode(GL_MODELVIEW);
+  glPushMatrix();
+  glLoadIdentity();
+  output(80, 2800, "Welcome to rocketlaunch.");
+glPopMatrix();
+  glMatrixMode(GL_PROJECTION);
+  glPopMatrix();*/
+
+
+	rocket();
+	flag();
+	rbase();
+	land();
+	glFlush();
+}
+void myinit()
+{
+	glClearColor(0.1,.5,0.6,1);
+	glColor3f(1,0,0);
+
+	glPointSize(5);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(0,499,0,499);
+glMatrixMode(GL_MODELVIEW);
+}
+void main(int argc,char** argv)
+{
+	
+
+	glutInit(&argc,argv);
+	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
+	glutInitWindowSize(1000,1000);
+	//glutInitWindowPosition(0,0);
+	glutCreateWindow("ROCKET LAUNCH");
+
+	glutDisplayFunc(display);
+glutCreateMenu(menu_select);
+  glutAddMenuEntry("Quit", QUIT);
+glutAttachMenu(GLUT_RIGHT_BUTTON);
+	myinit();
+	glutMainLoop();
+}
