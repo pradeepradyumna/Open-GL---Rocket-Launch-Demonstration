@@ -1,5 +1,5 @@
 # Open GL - Rocket Launch Demonstration
- This code was written Using Open GL Toolkit almost about 10 years ago. 
+ This code was written Using Open GL Toolkit almost about 10 years ago as one of the college projects 
  
  What it contains?
  A 2D scenery of a rocket with a nice background consisting of greenery and a blue sky at the top.  
